@@ -26,3 +26,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Post)
+admin.site.register(models.Restaurant)
+admin.site.register(models.Category)
+admin.site.register(models.Comment)

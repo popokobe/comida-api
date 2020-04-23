@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
     PermissionsMixin
 
+from django.conf import settings
+
 
 class UserManager(BaseUserManager):
 
@@ -35,3 +37,56 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Post(models.Model):
+    """Post object"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=255)
+    note = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
+class Restaurant(models.Model):
+    """Restaurant object to be used for a post"""
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    category = models.ForeignKey('Category', on_delete=models.PROTECT)
+    name = models.CharField(max_length=255)
+    area = models.CharField(max_length=255)
+    address = models.CharField(max_length=255, blank=True)
+    dish = models.CharField(max_length=255, blank=True)
+    expense = models.IntegerField()
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class Category(models.Model):
+    """Category object to be used for restaurants"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.PROTECT)
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Comment(models.Model):
+    """Comment object to be used for a post"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    comment_body = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.comment_body
