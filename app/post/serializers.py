@@ -48,6 +48,15 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Restaurant
-        fields = ('id', 'post', 'category', 'name', 'area',
+        fields = ('id', 'post', 'category', 'image', 'name', 'area',
                   'address', 'dish', 'expense', 'rating')
+        read_only_fields = ('id',)
+
+
+class RestaurantImageSerializer(serializers.ModelSerializer):
+    """Serializer for uploading images to restaurants"""
+
+    class Meta:
+        model = Restaurant
+        fields = ('id', 'image')
         read_only_fields = ('id',)

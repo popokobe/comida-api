@@ -25,4 +25,4 @@ urlpatterns = [
     path('docs/', include_docs_urls(title='API documentation')),
     path('api/user/', include('user.urls')),
     path('api/post/', include('post.urls')),
-] + static(settings.MEDIA_URL, document_url=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
