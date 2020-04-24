@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 from rest_framework.documentation import include_docs_urls
 
@@ -23,4 +25,4 @@ urlpatterns = [
     path('docs/', include_docs_urls(title='API documentation')),
     path('api/user/', include('user.urls')),
     path('api/post/', include('post.urls')),
-]
+] + static(settings.MEDIA_URL, document_url=settings.MEDIA_ROOT)

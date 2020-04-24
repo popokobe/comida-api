@@ -1,8 +1,19 @@
+import uuid
+import os
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
     PermissionsMixin
 
 from django.conf import settings
+
+
+def restaurant_image_file_path(instance, filename):
+    """Generate file path for new restaurant image"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('uploads/restaurant/', filename)
 
 
 class UserManager(BaseUserManager):
@@ -57,6 +68,7 @@ class Restaurant(models.Model):
     """Restaurant object to be used for a post"""
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
+    image = models.ImageField(null=True, upload_to=restaurant_image_file_path)
     name = models.CharField(max_length=255)
     area = models.CharField(max_length=255)
     address = models.CharField(max_length=255, blank=True)
