@@ -6,9 +6,12 @@ from post import views
 
 router = DefaultRouter()
 router.register('categories', views.CategoryViewSet)
+router.register('posts', views.PostViewSet)
+router.register('comments', views.CommentViewSet)
+
 
 app_name = 'post'
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]
