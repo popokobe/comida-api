@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from core.models import Category, Post, Comment
+from core.models import Category, Post, Comment, Restaurant
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    """Serializer for creating comments"""
+    """Serializer for comment object"""
 
     post = serializers.PrimaryKeyRelatedField(
         many=False,
@@ -33,3 +33,21 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ('id', 'user', 'post', 'comment_body')
         read_only_fields = ('id', 'user', 'post')
+
+
+class RestaurantSerializer(serializers.ModelSerializer):
+    """Serializer for restauran object"""
+    post = serializers.PrimaryKeyRelatedField(
+        many=False,
+        queryset=Post.objects.all()
+    )
+    category = serializers.PrimaryKeyRelatedField(
+        many=False,
+        queryset=Category.objects.all()
+    )
+
+    class Meta:
+        model = Restaurant
+        fields = ('id', 'post', 'category', 'name', 'area',
+                  'address', 'dish', 'expense', 'rating')
+        read_only_fields = ('id',)

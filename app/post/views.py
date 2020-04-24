@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import Category, Post, Comment
+from core.models import Category, Post, Comment, Restaurant
 
 from post import serializers
 
@@ -54,3 +54,10 @@ class CommentViewSet(viewsets.GenericViewSet,
     def perform_create(self, serializer):
         """Create a new comment"""
         serializer.save(user=self.request.user)
+
+
+class RestaurantViewSet(viewsets.ModelViewSet):
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+    queryset = Restaurant.objects.all()
+    serializer_class = serializers.RestaurantSerializer

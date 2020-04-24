@@ -8,6 +8,7 @@ router = DefaultRouter()
 router.register('categories', views.CategoryViewSet)
 router.register('posts', views.PostViewSet)
 router.register('comments', views.CommentViewSet)
+router.register('restaurants', views.RestaurantViewSet)
 
 
 app_name = 'post'
