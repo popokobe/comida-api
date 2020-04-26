@@ -1,5 +1,5 @@
 FROM python:3.7-alpine
-MAINTAINER popokobe
+LABEL maintainer='popokobe'
 
 ENV PYTHONUNBUFFERED 1
 
