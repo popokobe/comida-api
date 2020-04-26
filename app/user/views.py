@@ -1,4 +1,4 @@
-from rest_framework import generics, permissions, authentication, permissions
+from rest_framework import generics, permissions, authentication
 from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
@@ -50,7 +50,7 @@ class FollowUserView(APIView):
                 if from_user in to_user.followers.all():
                     follow = False
                     from_user.following.remove(to_user)
-                    to_user.followers.add(from_user)
+                    to_user.followers.remove(from_user)
                 else:
                     follow = True
                     from_user.following.add(to_user)

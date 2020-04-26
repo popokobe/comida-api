@@ -113,4 +113,5 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = '__all__'
+        fields = ('id', 'username', 'bio')
+        # fields = '__all__'
