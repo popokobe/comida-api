@@ -1,6 +1,7 @@
 import colors from "vuetify/es5/util/colors";
 
 module.exports = {
+  mode: "spa",
   /*
    ** Headers of the page
    */
@@ -17,29 +18,35 @@ module.exports = {
    ** Customize the progress bar color
    */
   loading: { color: "#3B8070" },
+  // plugins: ["~/plugins/axios.js"],
   modules: ["@nuxtjs/vuetify", "@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
-    baseURL: "http://127.0.0.1:8000"
+    baseURL: "http://127.0.0.1:8000/api"
   },
-  // auth: {
-  //   redirect: {
-  //     login: "/login/", // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
-  //     logout: "/login/", // ログアウト時のリダイレクトURL
-  //     home: "/" // ログイン後のリダイレクトURL
-  //   },
-  //   strategies: {
-  //     local: {
-  //       endpoints: {
-  //         login: { url: "/auth/login/", method: "post", propertyName: "token" },
-  //         user: { url: "/auth/myinfo/", method: "get", propertyName: false }
-  //       },
-  //       tokenType: "jwt"
-  //     }
-  //   }
-  // },
-  // router: {
-  //   middleware: ["auth"]
-  // },
+  auth: {
+    cookie: false,
+    redirect: {
+      login: "/login", // 未ログイン時に認証ルートへアクセスした際のリダイレクトURL
+      logout: "/login", // ログアウト時のリダイレクトURL
+      home: false // ログイン後のリダイレクトURL, タイミングを任意にするためにfalse
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/user/login/",
+            method: "post",
+            propertyName: "token"
+          },
+          user: { url: "/user/me/", method: "get", propertyName: false }
+        },
+        tokenType: "token"
+      }
+    }
+  },
+  router: {
+    middleware: ["auth"]
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
