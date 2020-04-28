@@ -16,6 +16,14 @@ def restaurant_image_file_path(instance, filename):
     return os.path.join('uploads/restaurant/', filename)
 
 
+def profile_image_file_path(instance, filename):
+    """Generate file path for new profile image"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('uploads/profile/', filename)
+
+
 class UserManager(BaseUserManager):
 
     def create_user(self, email, username, password=None, **extra__fields):
@@ -48,6 +56,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     fullname = models.CharField(max_length=60, blank=True)
     bio = models.TextField(blank=True)
+    profile_pic = models.ImageField(
+        upload_to=profile_image_file_path, default='avatar.png')
     """
         The symmetrical field option means that
         you don't necessarily have to follow the person who follows you.

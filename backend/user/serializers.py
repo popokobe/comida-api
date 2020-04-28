@@ -26,7 +26,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'username', 'password', 'bio')
+        fields = ('email', 'username', 'password', 'bio', 'profile_pic')
         extra_kwargs = {'password': {'write_only': True,
                                      'min_length': 5},
                         'username': {'min_length': 3}}
@@ -90,7 +90,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'bio', 'number_of_followers',
+        fields = ('id', 'username', 'bio', 'profile_pic', 'number_of_followers',
                   'number_of_following', 'number_of_posts',
                   'user_posts', 'followed_by_req_user')
 
@@ -113,5 +113,5 @@ class FollowSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'bio')
+        fields = ('id', 'username', 'bio', 'profile_pic')
         # fields = '__all__'
