@@ -1,4 +1,4 @@
-FROM node:11.1
+FROM node:12.9.0-alpine
 LABEL maintainer='popokobe'
 
 ENV LANG C.UTF-8
@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 
-RUN apt-get update && apt-get install
+RUN apk update && apk upgrade
 
 ARG CMD_YARN_VERSION=1.13.0
 RUN npm install --global yarn@$CMD_YARN_VERSION && \

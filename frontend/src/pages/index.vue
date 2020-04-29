@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container>
     <h1>hello</h1>
     <!-- <v-btn @click="test">おしてね</v-btn> -->
-  </div>
+  </v-container>
 </template>
 
 <script>

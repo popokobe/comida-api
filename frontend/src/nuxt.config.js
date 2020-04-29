@@ -53,6 +53,7 @@ module.exports = {
    */
   vuetify: {
     customVariables: ["~/assets/variables.scss"],
+    treeShake: true,
     theme: {
       dark: false,
       themes: {

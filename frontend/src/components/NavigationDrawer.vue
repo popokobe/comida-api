@@ -1,5 +1,9 @@
 <template>
-  <v-navigation-drawer :value="this.$store.state.drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+  <v-navigation-drawer
+    :value="this.$store.state.drawer"
+    :clipped="$vuetify.breakpoint.lgAndUp"
+    app
+  >
     <v-list dense>
       <template v-for="item in items">
         <v-row v-if="item.heading" :key="item.heading" align="center">
