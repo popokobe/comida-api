@@ -1,8 +1,9 @@
-from rest_framework import generics, permissions, authentication
+from rest_framework import generics, permissions, authentication, status
 from rest_framework.views import APIView
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
 from rest_framework.response import Response
+
 
 from django.contrib.auth import get_user_model
 
@@ -40,6 +41,8 @@ class UserProfileView(generics.RetrieveAPIView):
 
 
 class FollowUserView(APIView):
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None, username=None):
         to_user = get_user_model().objects.get(username=username)
@@ -55,7 +58,9 @@ class FollowUserView(APIView):
                     follow = True
                     from_user.following.add(to_user)
                     to_user.followers.add(from_user)
-
+            else:
+                return Response({'errors': 'You cannot follow your account'},
+                                status=status.HTTP_400_BAD_REQUEST)
         data = {
             'follow': follow
         }
