@@ -43,5 +43,10 @@ export const actions = {
     const endpoint = `/user/${username}/get-following/`;
     const following = await this.$axios.$get(endpoint);
     context.commit("setUserFollowing", following);
+  },
+  async followUser(context, to_user) {
+    const endpoint = `/user/${to_user}/follow/`;
+    await this.$axios.$get(endpoint);
+    // dispatch("getUserFollowers", username);
   }
 };

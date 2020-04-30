@@ -159,5 +159,6 @@ class PrivateUserApiTests(TestCase):
     #     self.assertTrue(res, True)
     #     res = self.client.get(f'/api/user/{to_user.username}/get-followers')
     #     self.assertContains(res.data, self.user.username)
-    #     res = self.client.get(f'/api/user/{self.user.username}/get-following')
+    #     res =
+    #           self.client.get(f'/api/user/{self.user.username}/get-following')
     #     self.assertContains(res.data, to_user.username)

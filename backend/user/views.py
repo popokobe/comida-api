@@ -74,7 +74,7 @@ class GetFollowersView(generics.ListAPIView):
     def get_queryset(self):
         username = self.kwargs['username']
         queryset = get_user_model().objects.get(
-            username=username).following.all()
+            username=username).followers.all()
 
         return queryset
 
