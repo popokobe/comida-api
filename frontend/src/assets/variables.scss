@@ -2,3 +2,8 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+// disable v-btn all uppercase
+.v-btn {
+  text-transform: none !important;
+}
