@@ -12,7 +12,7 @@
       <v-card>
         <v-card-title>Following</v-card-title>
         <v-divider></v-divider>
-        <v-card-text style="height: 400px;">
+        <v-card-text class="pa-0" style="height: 400px;">
           <v-list-item-group v-model="followings" color="primary">
             <v-list-item v-for="(following, i) in followings" :key="i">
               <v-list-item-icon>
@@ -25,6 +25,7 @@
                   v-text="following.username"
                 ></v-list-item-title>
               </v-list-item-content>
+              <v-btn depressed small color="primary">Follow</v-btn>
             </v-list-item>
           </v-list-item-group>
         </v-card-text>
@@ -33,7 +34,6 @@
           <v-btn color="blue darken-1" text @click="dialog = false"
             >Close</v-btn
           >
-          <v-btn color="blue darken-1" text @click="dialog = false">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
