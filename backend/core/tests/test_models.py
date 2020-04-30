@@ -6,18 +6,21 @@ from django.contrib.auth import get_user_model
 from core import models
 
 
-def sample_user(email='test@example.com', password='secret'):
+def sample_user(username='testuser', email='test@example.com',
+                password='secret'):
     """Create a sample user"""
-    return get_user_model().objects.create_user(email, password)
+    return get_user_model().objects.create_user(username, email, password)
 
 
 class ModelTests(TestCase):
 
-    def test_create_user_with_email_successful(self):
+    def test_create_user_with_username_and_email_successful(self):
         """Test creating a new user with an email is successful"""
+        username = 'testuser'
         email = 'test@example.com'
         password = 'secret'
         user = get_user_model().objects.create_user(
+            username=username,
             email=email,
             password=password
         )
@@ -40,6 +43,7 @@ class ModelTests(TestCase):
     def test_create_new_superuser(self):
         """Test creating a new superuser"""
         user = get_user_model().objects.create_superuser(
+            'testuser',
             'test@example.com',
             'secret'
         )
@@ -51,11 +55,10 @@ class ModelTests(TestCase):
         """Test the post string representation"""
         post = models.Post.objects.create(
             user=sample_user(),
-            title='Test title',
             note='Test note'
         )
 
-        self.assertEqual(str(post), post.title)
+        self.assertEqual(str(post), f'{post.user.username}\'s post')
 
     @patch('uuid.uuid4')
     def test_restaurant_file_name_uuid(self, mock_uuid):
